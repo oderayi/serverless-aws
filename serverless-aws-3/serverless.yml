@@ -1,0 +1,25 @@
+service: serverless-aws-3
+frameworkVersion: '3'
+configValidationMode: error
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: us-east-1
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - sns:SetSMSAttributes
+            - sns:Publish
+          Resource: '*'
+  
+functions:
+  sendSMS:
+    handler: lambdas/endpoints/sendSMS.handler
+    events:
+      - http:
+          path: send-sms
+          method: POST
+          cors: true
