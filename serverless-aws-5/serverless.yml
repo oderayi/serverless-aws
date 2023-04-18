@@ -1,0 +1,27 @@
+service: serverless-aws
+frameworkVersion: '3'
+configValidationMode: error
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: us-east-1
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - ses:*
+          Resource: '*'
+  
+functions:
+  sendReminder:
+    handler: lambdas/scheduleTasks/reminderEmail.handler
+    events:
+      - schedule: cron(0 9 ? * 7 *)
+  sendMorningNews:
+    handler: lambdas/scheduleTasks/morningNews.handler
+    events:
+      - schedule: cron(15 7 ? * * *)
+
+
