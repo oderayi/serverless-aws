@@ -1,4 +1,4 @@
-service: serverless-aws-3
+service: serverless-aws
 frameworkVersion: '3'
 configValidationMode: error
 
