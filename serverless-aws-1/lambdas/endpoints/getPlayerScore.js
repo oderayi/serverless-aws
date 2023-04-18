@@ -1,6 +1,6 @@
 const Responses = require('../common/API_responses');
 const Dynamo = require('../common/Dynamo');
-const { withhooks } = require('../common/hooks');
+const { withHooks } = require('../common/hooks');
 
 const tableName = process.env.tableName;
 
@@ -21,4 +21,4 @@ const handler = async event => {
     return Responses._200({ user });   
 }
 
-exports.handler = withhooks(handler);
+exports.handler = withHooks(handler);
